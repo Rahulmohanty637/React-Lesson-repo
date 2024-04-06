@@ -4,12 +4,19 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-  let counter = 15;
+  let [counter, setCount] = useState(15)
   function addvalue() {
     console.log("Value added", Math.random());
-    counter = counter + 1;
-    console.log(counter)
+    if(counter < 20){
+      counter = counter + 1;
+    }
+    setCount(counter);
+  }
+
+  function minusvalue(){
+    if(counter > 0){
+      setCount(counter - 1);
+    }
   }
 
   return (
@@ -19,7 +26,7 @@ function App() {
       <button onClick={addvalue}>Increase</button>
       <br />
       <br />
-      <button>Decrease</button>
+      <button onClick={minusvalue}>Decrease</button>
     </>
   )
 }
