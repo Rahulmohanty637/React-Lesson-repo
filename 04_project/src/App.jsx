@@ -8,16 +8,16 @@ function App() {
   const [count, setCount] = useState(0);
 
   const obj = {
-    username : "Rahul",
-    roll : "21",
+    username: "Rahul",
+    roll: "21",
   }
 
   return (
     <>
       <h1 className="bg-green-400 p-4 rounded-xl mb-5">TailwindCSS</h1>
-     <Card username="Emma" btnText="Click mee"/>
-     <Card username="Georgia" btnText="Explore mee"/>
-     <Card username="Georgia"/>
+      <Card username="Emma" btnText="Click mee" />
+      <Card username="Georgia" btnText="Explore mee" />
+      <Card username="Georgia" />
     </>
   );
 }
