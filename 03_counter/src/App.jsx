@@ -13,10 +13,9 @@ function App() {
     //   counter = counter + 1;
     // }
     // setCount(counter);
-    setCount(counter + 1);
-    console.log(counter);
-    setCount(counter + 1);
-    setCount(counter + 1);
+    setCount(prevCounter => prevCounter + 1);
+    setCount(prevCounter => prevCounter + 1);
+    setCount(prevCounter => prevCounter + 1);
     console.log(counter);
   }
 
