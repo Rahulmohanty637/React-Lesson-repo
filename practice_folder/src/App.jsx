@@ -1,13 +1,38 @@
-import { useState, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { useCallback, useRef } from 'react';
 
 function App() {
   const [length, setLength] = useState(8);
   const [numalw, setNumalw] = useState(false);
   const [charalw, setCharalw] = useState(false);
   const [password, setPassword] = useState("");
+
+  //useRef hook
+  const passwordRef = useRef(null);
+
+  const passwordGenerator = useCallback(() => {
+    let pass = "";
+    let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    if (numalw) str += "0123456789";
+    if (charalw) str += "`~!@#$%^&*()_+={}[]";
+    for (let index = 0; index < length; index++) {
+      let char = Math.floor(Math.random() * str.length + 1);
+      pass += str.charAt(char);
+    }
+    setPassword(pass);
+  }, [length, numalw, charalw, setPassword]);
+
+  const copyToClipboard = useCallback(() => { 
+    passwordRef.current?.select();
+    window.navigator.clipboard.writeText(password);
+  }, [password])
+
+  useEffect(() => {
+    passwordGenerator()
+  }, [length, numalw, charalw, setPassword])
 
   return (
     <>
@@ -60,8 +85,7 @@ function App() {
         </div>
       </div>
     </>
-  );
+  )
 }
 
 export default App
-
