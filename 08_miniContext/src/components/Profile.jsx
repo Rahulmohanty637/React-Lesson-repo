@@ -6,7 +6,7 @@ function Profile() {
 
  if(!user) return <div>User Not Found</div>
 
- return <div>Welcome {user.usrename}</div>
+ return <div>Welcome {user.username}</div>
 }
 
 export default Profile

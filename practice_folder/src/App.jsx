@@ -1,91 +1,150 @@
-import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { useCallback, useRef } from 'react';
+import React from "react";
+import {
+  FaPlus,
+  FaSearch,
+  FaBell,
+  FaGlobe,
+  FaCog,
+  FaUser,
+} from "react-icons/fa";
 
-function App() {
-  const [length, setLength] = useState(8);
-  const [numalw, setNumalw] = useState(false);
-  const [charalw, setCharalw] = useState(false);
-  const [password, setPassword] = useState("");
-
-  //useRef hook
-  const passwordRef = useRef(null);
-
-  const passwordGenerator = useCallback(() => {
-    let pass = "";
-    let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    if (numalw) str += "0123456789";
-    if (charalw) str += "`~!@#$%^&*()_+={}[]";
-    for (let index = 0; index < length; index++) {
-      let char = Math.floor(Math.random() * str.length + 1);
-      pass += str.charAt(char);
-    }
-    setPassword(pass);
-  }, [length, numalw, charalw, setPassword]);
-
-  const copyToClipboard = useCallback(() => { 
-    passwordRef.current?.select();
-    window.navigator.clipboard.writeText(password);
-  }, [password])
-
-  useEffect(() => {
-    passwordGenerator()
-  }, [length, numalw, charalw, setPassword])
-
+const App = () => {
   return (
-    <>
-      <div className='w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 my-8 text-green-500 bg-gray-700'>
-        <h1 className='text-white text-center text-sm'>Password Generator</h1>
-        <div className='flex shadow rounded-lg overflow-hidden mb-4'>
-          <input
-            type='text'
-            value={password}
-            className='outline-none w-full py-1 px-3'
-            placeholder='Password'
-            readOnly
-            ref={passwordRef}
-          />
-          <button onClick={copyToClipboard} className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0'>Copy</button>
-        </div>
-        <div className='flex text-sm gap-x-2'>
-          <div className='flex items-center gap-x-1'>
-            <input
-              type='range'
-              min={6}
-              max={100}
-              value={length}
-              className='cursor-pointer'
-              onChange={(e) => { setLength(e.target.value) }} />
-            <label>Length : {length}</label>
+    <div className="min-h-screen bg-gray-100">
+      <header className="bg-green-500 text-white p-4 flex justify-between items-center">
+        <h1 className="text-xl">Home</h1>
+        <a href="#" className="text-white text-lg">
+          AI Heatmap
+        </a>
+        <nav className="flex space-x-4 items-center">
+          <div className="flex space-x-4 items-center">
+            <FaPlus className="text-white text-2xl cursor-pointer" />
+            <FaSearch className="text-white text-2xl cursor-pointer" />
+            <FaBell className="text-white text-2xl cursor-pointer" />
+            <FaGlobe className="text-white text-2xl cursor-pointer" />
+            <FaCog className="text-white text-2xl cursor-pointer" />
+            <FaUser className="text-white text-2xl cursor-pointer" />
           </div>
-          <div className='flex items-center gap-x-1'>
-            <input
-              type='checkbox'
-              defaultChecked={numalw}
-              id='numberInput'
-              className='cursor-pointer'
-              onChange={() => {
-                setNumalw((prev) => !prev)
-              }} />
-            <label htmlFor='numberInput'>Numbers</label>
-          </div>
-          <div className='flex items-center gap-x-1'>
-            <input
-              type='checkbox'
-              defaultChecked={charalw}
-              id='characterInput'
-              className='cursor-pointer'
-              onChange={() => {
-                setCharalw((prev) => !prev)
-              }} />
-            <label htmlFor='numberInput'>Characters</label>
-          </div>
-        </div>
-      </div>
-    </>
-  )
-}
+        </nav>
+      </header>
 
-export default App
+      <main className="p-4">
+        <div className="grid grid-cols-3 gap-4 mb-4">
+          <div className="bg-white p-4 rounded shadow flex flex-col items-center">
+            <h2 className="text-xl">Project</h2>
+            <p className="text-2xl">0</p>
+          </div>
+          <div className="bg-white p-4 rounded shadow flex flex-col items-center">
+            <h2 className="text-xl">Device</h2>
+            <p className="text-2xl">0</p>
+          </div>
+          <div className="bg-white p-4 rounded shadow flex flex-col items-center">
+            <h2 className="text-xl">Alarm</h2>
+            <p className="text-2xl">0</p>
+          </div>
+        </div>
+
+        {/* <div className="flex items-center space-x-4 mb-4">
+          <button className="bg-green-500 text-white p-2 rounded">Add</button>
+          <button className="bg-gray-200 text-black p-2 rounded">
+            Project Management
+          </button>
+          <button className="bg-gray-200 text-black p-2 rounded">
+            Unfind Device
+          </button>
+          <input
+            type="text"
+            placeholder="Enter project name"
+            className="border p-2 rounded flex-1"
+          />
+        </div> */}
+
+        {/* <div className="bg-white p-4 rounded shadow mb-4">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl">Quick Add</h2>
+            <div className="flex items-center space-x-4">
+              <a href="#" className="text-green-500">
+                Quick Start Guide
+              </a>
+              <a href="#" className="text-green-500">
+                Add Demo Project
+              </a>
+            </div>
+          </div>
+        </div> */}
+
+        {/* <div className="bg-white p-4 rounded shadow">
+          <table className="w-full text-left">
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Alias</th>
+                <th>Model</th>
+                <th>SN</th>
+                <th>Config Status</th>
+                <th>Group</th>
+                <th>Management IP</th>
+                <th>Egress IP</th>
+                <th>Firmware Version</th>
+                <th>MAC</th>
+                <th>Offline Time</th>
+                <th>Remark</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colSpan="13" className="text-center py-4">
+                  No Data
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div> */}
+
+        <div className="p-6">
+          <div className="flex justify-between items-center border-b mb-4">
+            <div className="flex space-x-4 text-blue-500">
+              <button className="px-4 py-2 border-b-2 border-blue-500">
+                Created (0)
+              </button>
+              <button className="px-4 py-2">Received (0)</button>
+              <button className="px-4 py-2">Shared (0)</button>
+            </div>
+          </div>
+          <div className="flex justify-between items-center mb-4">
+            <div className="flex space-x-4">
+              <button className="px-4 py-2 bg-green-500 text-white rounded">
+                Add
+              </button>
+              <button className="px-4 py-2 bg-gray-200 rounded">
+                Project Management
+              </button>
+              <button className="px-4 py-2 bg-gray-200 rounded">
+                Unfind Device
+              </button>
+            </div>
+            <input
+              type="text"
+              placeholder="Enter project name"
+              className="border px-4 py-2 rounded"
+            />
+          </div>
+          <div className="flex flex-col items-center">
+            <button className="mb-4 px-6 py-2 bg-green-500 text-white rounded">
+              Quick Add
+            </button>
+            <button className="mb-2 px-6 py-2 bg-white border rounded">
+              Quick Start Guide
+            </button>
+            <button className="px-6 py-2 bg-white border rounded">
+              Add Demo Project
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default App;
